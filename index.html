@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RawiBot - Musée de Jemaa el-Fna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS -->
+</head>
+<body>
+    
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">RawiBot</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" onclick="showSection('accueil')">Accueil</a></li>
+                <li><a href="chatbot.html" onclick="showSection('chatbot')">Chatbot</a></li>
+                <li><a href="#audio" onclick="showSection('audio')">Audio</a></li>
+                <li><a href="quiz.html" onclick="showSection('Quiz')">Quiz</a></li>
+            </ul>
+            <div class="burger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Section Accueil -->
+    <section id="accueil" class="slideshow-container">
+        <div class="slide"><img src="Slide1.jpg" alt="Slide 1" /></div>
+        <div class="slide"><img src="Slide2.jpg" alt="Slide 2" /></div>
+        <div class="slide"><img src="Slide3.jpg" alt="Slide 3" /></div>
+        <div class="slide"><img src="Slide4.jpg" alt="Slide 4" /></div>
+        <div class="hero-overlay">
+            <h1>Bienvenue au Musée de Jamaa el-Fna</h1>
+            <p>Découvrez notre conteur virtuel <strong>RawiBot</strong>, un guide culturel interactif qui vous plonge dans l'univers vivant de Jemaa el-Fna.</p>
+            <div class="cta-buttons">
+                <a href="chatbot.html" class="btn">Lancer le Chatbot</a>
+                <a href="#audio" class="btn btn-outline" onclick="showSection('audio')">Écouter le patrimoine</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- Section QR Code -->
+        <section id="qr" class="qr-section">
+            <h2>Scanner le QR code pour accéder à RawiBot</h2>
+            <img src="qr-code.png" alt="QR Code RawiBot" />
+            <p>Utilisez votre smartphone pour lancer le chatbot directement depuis votre mobile.</p>
+        </section>
+
+        <!-- Section Chatbot -->
+        <section id="chatbot" style="display:none; max-width: 600px; margin: 3rem auto; text-align:center;">
+            <h2>Chatbot RawiBot</h2>
+            <div style="height: 500px; position: relative;">
+                <df-messenger
+                    intent="WELCOME"
+                    chat-title="RawiBot"
+                    agent-id="TON_AGENT_ID_ICI"
+                    language-code="fr"
+                ></df-messenger>
+            </div>
+        </section>
+
+        <!-- Intégration SDK Dialogflow Messenger -->
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
+        <!-- Section Audio -->
+        <section id="audio" class="audio-section" style="display:none;">
+            <h2>Audio Patrimoine</h2>
+            <p>Écoutez les enregistrements traditionnels et histoires de Jemaa el-Fna.</p>
+            <audio controls>
+                <source src="Hikaya.mp3" type="audio/mpeg" />
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+        </section>
+    </main>
+
+    <footer>
+        <p>Projet de fin de module "Management d'un site patrimonial" encadré par Prof. Dr Wahiba Moubchir – Master d'excellence ingénierie des projets touristiques et patrimoniaux</p>
+    </footer>
+
+    <script src="script.js"></script> <!-- Lien vers le fichier JavaScript -->
+</body>
+</html>

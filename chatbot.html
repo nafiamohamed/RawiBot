@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatbot RawiBot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">RawiBot</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="chatbot.html">Chatbot</a></li>
+        <li><a href="#" onclick="showAudio()">Audio</a></li>
+
+      </ul>
+      <div class="burger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Bandes décoratives -->
+  <img src="Imagess1.png" alt="Décor gauche" class="bande-deco bande-deco-gauche" draggable="false" />
+  <img src="Imagess2.png" alt="Décor droite" class="bande-deco bande-deco-droite" draggable="false" />
+
+  <!-- Fond animé -->
+  <div class="background-animation"></div>
+
+  <!-- Contenu centré -->
+  <div class="hero-center">
+    <div class="imageR">
+      <img src="rawibot.png" alt="Image d'illustration" class="chatbot-image">
+    </div>
+
+    <div id="a-propos" class="intro">
+      <h2>Votre guide virtuel pour vous aider à trouver des informations rapidement et facilement.</h2>
+    </div>
+  </div>
+
+  <!-- Intégration du chatbot Dialogflow -->
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <df-messenger
+    intent="WELCOME"
+    chat-title="RAWIBot"
+    agent-id="cf5edb7c-ce3b-40b0-b832-e464cce4592b"
+    language-code="fr"
+  ></df-messenger>
+
+  <!-- Script menu responsive -->
+  
+  <section id="audio" class="audio-section" style="display: none;">
+    <h2>Écouter le patrimoine oral</h2>
+    <p>Découvrez un extrait raconté sur la place Jemaa el-Fna :</p>
+    
+    <audio controls>
+      <source src="Hikaya.mp3" type="audio/mpeg" />
+      Votre navigateur ne supporte pas la lecture audio.
+    </audio>
+  </section>
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('show');
+    }
+  
+    function showAudio() {
+      const audioSection = document.getElementById('audio');
+      audioSection.style.display = 'block';
+      // Optionnel : faire défiler jusqu'à la section audio
+      audioSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+  
+  
+</body>
+</html>

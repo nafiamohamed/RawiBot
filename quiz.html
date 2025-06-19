@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RawiBot - Quiz Puzzle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">RawiBot</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="chatbot.html">Chatbot</a></li>
+        <li><a href="audio.html">Audio</a></li>
+        <li><a href="quiz.html" class="active">Quiz</a></li>
+      </ul>
+      <div class="burger" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Puzzle - Remettez la photo en ordre !</h1>
+
+    <div id="puzzle-container"></div>
+
+    <div id="message">Bravo, vous avez réussi ! 🎉</div>
+
+    <button id="reset-btn">Recommencer</button>
+  </main>
+
+  <script src="quiz.js"></script>
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

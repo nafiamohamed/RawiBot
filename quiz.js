@@ -1,0 +1,122 @@
+const puzzleContainer = document.getElementById('puzzle-container');
+const message = document.getElementById('message');
+const resetBtn = document.getElementById('reset-btn');
+
+const size = 3; // puzzle 3x3
+let pieces = [];
+let emptyPos = { row: size - 1, col: size - 1 };
+
+function createPieces() {
+  pieces = [];
+  puzzleContainer.innerHTML = '';
+
+  // Calcul taille dynamique d'une pièce
+  const containerWidth = puzzleContainer.clientWidth;
+  const pieceSize = containerWidth / size;
+
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
+      const piece = document.createElement('div');
+      piece.classList.add('piece');
+
+      piece.style.width = pieceSize + 'px';
+      piece.style.height = pieceSize + 'px';
+
+      piece.dataset.row = row;
+      piece.dataset.col = col;
+      piece.setAttribute('data-row-original', row);
+      piece.setAttribute('data-col-original', col);
+
+      if (row === emptyPos.row && col === emptyPos.col) {
+        piece.classList.add('empty');
+      } else {
+        piece.style.backgroundPosition = `-${col * pieceSize}px -${row * pieceSize}px`;
+        piece.style.backgroundSize = `${pieceSize * size}px ${pieceSize * size}px`;
+      }
+
+      piece.addEventListener('click', () => tryMove(piece));
+      puzzleContainer.appendChild(piece);
+      pieces.push(piece);
+    }
+  }
+}
+
+function tryMove(piece) {
+  const row = +piece.dataset.row;
+  const col = +piece.dataset.col;
+
+  if (isAdjacent(row, col, emptyPos.row, emptyPos.col)) {
+    swapPositions(piece, emptyPos);
+    message.classList.remove('show');
+    if (checkSolved()) {
+      message.classList.add('show');
+    }
+  }
+}
+
+function isAdjacent(r1, c1, r2, c2) {
+  return (r1 === r2 && Math.abs(c1 - c2) === 1) ||
+         (c1 === c2 && Math.abs(r1 - r2) === 1);
+}
+
+function swapPositions(piece, empty) {
+  const emptyPiece = pieces.find(p => p.classList.contains('empty'));
+
+  const pieceRow = +piece.dataset.row;
+  const pieceCol = +piece.dataset.col;
+
+  piece.dataset.row = empty.row;
+  piece.dataset.col = empty.col;
+
+  emptyPiece.dataset.row = pieceRow;
+  emptyPiece.dataset.col = pieceCol;
+
+  pieces.sort((a, b) => {
+    if (+a.dataset.row === +b.dataset.row) {
+      return +a.dataset.col - +b.dataset.col;
+    }
+    return +a.dataset.row - +b.dataset.row;
+  });
+
+  puzzleContainer.innerHTML = '';
+  pieces.forEach(p => puzzleContainer.appendChild(p));
+
+  empty.row = pieceRow;
+  empty.col = pieceCol;
+}
+
+function checkSolved() {
+  return pieces.every(piece => {
+    if (piece.classList.contains('empty')) return true;
+    return +piece.dataset.row === +piece.getAttribute('data-row-original') &&
+           +piece.dataset.col === +piece.getAttribute('data-col-original');
+  });
+}
+
+function shuffle(times = 1000) {
+  for (let i = 0; i < times; i++) {
+    const neighbors = pieces.filter(p => {
+      const r = +p.dataset.row;
+      const c = +p.dataset.col;
+      return isAdjacent(r, c, emptyPos.row, emptyPos.col);
+    });
+    const randomPiece = neighbors[Math.floor(Math.random() * neighbors.length)];
+    swapPositions(randomPiece, emptyPos);
+  }
+}
+
+function resetPuzzle() {
+  createPieces();
+  shuffle(500);
+  message.classList.remove('show');
+}
+
+// Relancer le puzzle au chargement
+resetPuzzle();
+
+// Gérer redimensionnement dynamique de la fenêtre
+window.addEventListener('resize', () => {
+  resetPuzzle();
+});
+
+resetBtn.addEventListener('click', resetPuzzle);

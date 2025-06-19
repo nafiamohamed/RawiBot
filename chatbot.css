@@ -1,0 +1,231 @@
+:root {
+    --primary-color: rgb(161, 70, 70);
+    --accent-color: #d4af37;
+    --text-color: #333;
+    --bg-light: rgba(255, 255, 255, 0.8);
+    --font-main: 'Cairo', sans-serif;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-color);
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: beige;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+.nav-links li a:hover {
+    color: var(--accent-color);
+}
+
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}
+
+/* CONTENEUR CENTRAL */
+.hero-center {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* place en haut */
+    align-items: center;         /* centre horizontalement */
+    padding-top: 2vh;            /* espace en haut de l'écran */
+    padding-bottom: 2rem;
+    min-height: 80vh;
+    z-index: 2;
+    text-align: center;
+}
+
+/* IMAGE */
+.imageR {
+    margin: 1rem auto 0 auto;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    z-index: 2;
+}
+
+.chatbot-image {
+    width: 100%;
+    height: auto;
+    max-width: 350px;
+    margin-bottom: 1rem;
+}
+
+/* TEXTE */
+.intro {
+    position: relative;
+    margin: 1rem auto 2rem auto;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: 15px;
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+    z-index: 2;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.intro h2 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* DÉCOR LATERAL */
+.bande-deco {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 90px;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+}
+.bande-deco-gauche {
+    left: 0;
+}
+.bande-deco-droite {
+    right: 0;
+}
+@media (max-width: 768px) {
+    .bande-deco {
+        display: none;
+    }
+}
+
+/* FOND ANIMÉ */
+.background-animation {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #f1879b, #f3b36d, #9ba4c7);
+    background-size: 600% 600%;
+    animation: backgroundAnimation 30s ease infinite;
+}
+
+@keyframes backgroundAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE MENU */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: var(--primary-color);
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        width: 200px;
+        border-radius: 10px;
+        padding: 1rem;
+        z-index: 1001;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .burger {
+        display: flex;
+    }
+}
+.audio-section {
+    max-width: 600px;
+    margin: 3rem auto;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: center;
+    color: var(--primary-color);
+    z-index: 5;
+    position: relative;
+}
+
+.audio-section h2 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.audio-section p {
+    margin-bottom: 1rem;
+}
+
+audio {
+    width: 100%;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+.audio-section {
+    margin-top: 50px;
+    max-width: 600px;
+    background: rgba(255 255 255 / 0.9);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    color: #b7410e;
+    text-align: center;
+  }
+  
